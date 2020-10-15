@@ -1,3 +1,8 @@
 #!/bin/bash
 #
-
+if [ -e ~/RECYCLE] 
+then 
+	mkdir ~/RECYLE
+else
+	echo Папка ~/RECYLE уже существует
+fi
