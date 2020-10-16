@@ -1,0 +1,21 @@
+#!/bin/bash
+#basket = ~/RECYCLE
+
+if [ -e ~/RECYCLE ] 
+then 
+	mv "$1" ~/RECYCLE
+else
+	mkdir ~/RECYCLE 
+	mv "$1" ~/RECYCLE 
+fi 
+#echo 'Файл '$1' перемещен успешно'
+
+if [ -e ~/RECYCLE/"$1"  ]
+then
+	cd ~/RECYCLE
+	gzip "$1" 
+	echo "файл удалён"
+else 
+	"Файл не был удален" 
+fi 
+
