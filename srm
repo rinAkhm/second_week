@@ -1,7 +1,7 @@
 #!/bin/bash
 #basket = ~/RECYCLE
 
-RENAME  = $(date  +%y%m%d)
+#RENAME  = $(date  +%y%m%d)
 
 if [ -e ~/RECYCLE ] 
 then 
@@ -15,12 +15,17 @@ fi
 if [ -e ~/RECYCLE/"$1" ]
 then
 	cd ~/RECYCLE
-	newName = mv "$1" "$1 $RENAME"
-	gzip "$newName"
-	echo "файл удалён"
+	gzip "$1"
+	echo "файл был архивирован"
 else 
-	"Файл не был удален" 
+	"Файл не был архивирован" 
 fi 
+
+if [ -e ~/RECYCLE/"$1".gz ]
+then 
+#	echo "exist this file"
+	mv "$1".gz "$1":$(date +% d-%m-%y).gz
+fi
 
 if [ -e ~/RECYCLE ] 
 then 
