@@ -1,6 +1,7 @@
 #!/bin/bash
 #Данный скрип позволяет удалять выбранный файл 
-# пример команды srm namefle
+# пример команды: 
+# srm namefile/namedirectory
 
 if [ -n "$1" ]
 then
