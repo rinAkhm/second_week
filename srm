@@ -1,0 +1,37 @@
+#!/bin/bash
+#Данный скрип позволяет удалять выбранный файл 
+# пример команды: 
+# srm namefile/namedirectory
+
+if [ -n "$1" ]
+then
+	if [ -e ~/RECYCLE ]
+	then
+        	mv "$1" ~/RECYCLE
+	else
+        	mkdir ~/RECYCLE
+        	mv "$1" ~/RECYCLE
+	fi
+
+	if [ -d ~/RECYCLE/"$1" ] || [ -f ~/RECYCLE/"$1" ]
+	then
+        	cd ~/RECYCLE
+        	tar -cv "$1" | gzip > "$1".tar.gz
+        	rm -r "$1"
+        	echo " '$1' файл был успешно удален"
+	else
+        	"файл не был удален"
+	fi
+	if [ -e ~/RECYCLE/"$1".tar.gz ]
+	then
+        	mv "$1".tar.gz "$1":$(date +%F,%T).tar.gz
+	fi
+
+	if [ -e ~/RECYCLE ]
+	then
+        	cd ~/RECYCLE
+        	find -mtime 7 -name "*.gz" -delete
+	fi
+else 	
+	echo "вы не ввели параметр"
+fi
